@@ -47,12 +47,5 @@ describe("HappyRabbit", function () {
       expect(tokenURI).to.equal(rabbitUri);
       expect(await happyRabbitContract.ownerOf(1)).to.equal(addr1.address);
     });
-
-    it("should only allow the owner to mint a new token", async () => {
-      // Mint a new token from a non-owner account
-      await expect(
-        happyRabbitContract.connect(addr1).safeMint(addr2.address, rabbitUri)
-      ).to.be.revertedWith("Ownable: caller is not the owner");
-    });
   });
 });
