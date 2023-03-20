@@ -1,10 +1,14 @@
+const { ethers } = require("hardhat");
 const hre = require("hardhat");
 
 async function main() {
   const HappyRabbit = await hre.ethers.getContractFactory("HappyRabbit");
   const happyRabbit = await HappyRabbit.deploy();
-
+  const [addr1, addr2] = await ethers.getSigners();
   await happyRabbit.deployed();
+
+  const mint = await happyRabbit.safeMint(addr1.address);
+  await mint.wait();
 
   console.log(` deployed to ${happyRabbit.address}`);
 }
